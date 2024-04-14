@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import { ScrollToTop } from './components';
-// import { CartProvider } from './context/CartContext';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 

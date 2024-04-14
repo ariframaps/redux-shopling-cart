@@ -4,13 +4,7 @@ import { useDispatch } from 'react-redux'
 import { remove } from '../store/cartSlice'
 
 export const CartItem = ({ item }) => {
-    // const { removeFromCart } = useCart()
     const dispatch = useDispatch()
-
-    function handleRemove() {
-        // removeFromCart(item)
-        dispatch(remove(item))
-    }
 
     return (
         <li className="mb-3">
@@ -26,7 +20,7 @@ export const CartItem = ({ item }) => {
                         ${item.price || '357'}
                     </p>
                 </div>
-                <div onClick={handleRemove} className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                <div onClick={() => dispatch(remove(item))} className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                     <button className='inline-flex items-center px-3 py-2 text-md font-medium text-center text-white rounded-lg focus:ring-4 focus:outline-none bg-red-700 hover:bg-red-800 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'>
                         <p>Remove</p>
                     </button>

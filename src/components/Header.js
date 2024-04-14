@@ -1,18 +1,21 @@
 import { Link, NavLink } from "react-router-dom"
 import logo from "../assets/logo.png"
 import { useState, useEffect } from "react"
-// import { useCart } from "../context/CartContext"
 import { useSelector } from "react-redux"
 
 export const Header = () => {
+    // hamburger button menu setter
     const [openMenu, setOpenMenu] = useState(true)
-    const activeStyle = 'block py-2 px-3 text-white bg-blue-700 rounded xl:bg-transparent xl:text-blue-700 xl:p-0 xl:dark:text-blue-500 xl:font-bold'
-    const inactiveStyle = 'block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:hover:text-blue-700 xl:p-0 xl:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent dark:border-gray-700'
+
+    // darkmode setters
     const localStorageTheme = JSON.parse(localStorage.getItem('shoplingDarkMode'))
     const [darkMode, setDarkMode] = useState(localStorageTheme != null ? localStorageTheme : true)
 
-    // usecontext
-    // const { cart } = useCart()
+    // navigation link styles
+    const activeStyle = 'block py-2 px-3 text-white bg-blue-700 rounded xl:bg-transparent xl:text-blue-700 xl:p-0 xl:dark:text-blue-500 xl:font-bold'
+    const inactiveStyle = 'block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:hover:text-blue-700 xl:p-0 xl:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent dark:border-gray-700'
+
+    // cartSlice selector
     const cart = useSelector(state => state.cartState.cartList)
 
     useEffect(() => {

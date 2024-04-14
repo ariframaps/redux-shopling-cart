@@ -1,11 +1,9 @@
 import { useState } from "react";
 import logo from '../assets/logo.png'
-// import { useCart } from "../context/CartContext";
 import { useDispatch, useSelector } from "react-redux";
 import { add, remove } from "../store/cartSlice";
 
 export const ProductCard = ({ product }) => {
-
     // product thumbnail styles
     const imgStyle = (url) => {
         const style = {
@@ -22,13 +20,11 @@ export const ProductCard = ({ product }) => {
     const addBtnStyle = "bg-blue-700 hover:bg-blue-800 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     const addedBtnStyle = "bg-red-700 hover:bg-red-800 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
 
-    // use cart context
-    // const { cart, addToCart, removeFromCart } = useCart()
+    // cart slice selector and dispatch
     const cart = useSelector(state => state.cartState.cartList)
     const dispatch = useDispatch()
 
     // check if the product is already in the cart or not
-    // const checkProductAlreadyInCart = false
     const checkProductAlreadyInCart = cart.find(item => item.id === product.id)
     const [isInCart, setIsInCart] = useState(checkProductAlreadyInCart ? true : false)
 
@@ -37,9 +33,6 @@ export const ProductCard = ({ product }) => {
         isInCart ? dispatch(remove(product)) : dispatch(add(product));
         setIsInCart(!isInCart);
     }
-
-
-
 
     return (
         <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

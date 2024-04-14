@@ -10,13 +10,11 @@ const cartSlice = createSlice({
         add(state, action) {
             const newCart = state.cartList.concat(action.payload);
             const newTotal = state.total + action.payload.price
-            console.log(newCart);
             return { ...state, total: newTotal, cartList: newCart }
         },
         remove(state, action) {
             const newCart = state.cartList.filter(item => item.id !== action.payload.id)
             const newTotal = state.total - action.payload.price
-            console.log(newCart);
             return { ...state, total: newTotal, cartList: newCart }
         }
     }

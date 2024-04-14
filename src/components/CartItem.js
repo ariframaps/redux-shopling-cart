@@ -1,11 +1,15 @@
 // import { useCart } from "../context/CartContext"
 import logo from '../assets/logo.png'
+import { useDispatch } from 'react-redux'
+import { remove } from '../store/cartSlice'
 
 export const CartItem = ({ item }) => {
     // const { removeFromCart } = useCart()
+    const dispatch = useDispatch()
 
     function handleRemove() {
         // removeFromCart(item)
+        dispatch(remove(item))
     }
 
     return (
@@ -16,10 +20,10 @@ export const CartItem = ({ item }) => {
                 </div>
                 <div className="flex-1 min-w-0">
                     <p className="text-xl font-medium text-gray-900 truncate dark:text-white">
-                        {'judul'}
+                        {item.title || 'judul'}
                     </p>
                     <p className="text-2xl font-semibold text-blue-600 truncate dark:text-blue-200">
-                        ${'357'}
+                        ${item.price || '357'}
                     </p>
                 </div>
                 <div onClick={handleRemove} className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">

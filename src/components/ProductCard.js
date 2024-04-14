@@ -1,7 +1,7 @@
 import { useState } from "react";
 import logo from '../assets/logo.png'
 // import { useCart } from "../context/CartContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { add, remove } from "../store/cartSlice";
 
 export const ProductCard = ({ product }) => {
@@ -24,16 +24,17 @@ export const ProductCard = ({ product }) => {
 
     // use cart context
     // const { cart, addToCart, removeFromCart } = useCart()
+    const cart = useSelector(state => state.cartState.cartList)
     const dispatch = useDispatch()
 
     // check if the product is already in the cart or not
-    const checkProductAlreadyInCart = false
-    // const checkProductAlreadyInCart = cart.find(item => item.id === product.id)
+    // const checkProductAlreadyInCart = false
+    const checkProductAlreadyInCart = cart.find(item => item.id === product.id)
     const [isInCart, setIsInCart] = useState(checkProductAlreadyInCart ? true : false)
 
     // handle add to cart button
-    function handleAddToCart(product) {
-        isInCart ? dispatch(add(product)) : dispatch(remove(product));
+    function handleAddToCart() {
+        isInCart ? dispatch(remove(product)) : dispatch(add(product));
         setIsInCart(!isInCart);
     }
 
@@ -50,7 +51,7 @@ export const ProductCard = ({ product }) => {
                 </div>
                 <div>
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${product.price || 'harga'}</h5>
-                    <button onClick={() => handleAddToCart(product)} className={`inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:outline-none ${isInCart ? addedBtnStyle : addBtnStyle}`}>
+                    <button onClick={handleAddToCart} className={`inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:outline-none ${isInCart ? addedBtnStyle : addBtnStyle}`}>
                         <p>{(isInCart) ? 'Remove' : 'Add to cart'}</p>
                     </button>
                 </div>
